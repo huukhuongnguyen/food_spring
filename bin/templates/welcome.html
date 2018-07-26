@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+</head>
+<style type="text/css">
+.example {
+	margin: 20px;
+}
+</style>
+<body>
+	<div class="example">
+		<div class="container">
+			<div class="card">
+				<div class="content">
+					<div class="row">
+						<h1>Welcome</h1>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>User</th>
+									<th>Tên</th>
+									<th>Ngày sinh</th>
+									<th>Giới tính</th>
+									<th>Số điện thoại</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td th:text=" ${td.id} " />
+									<td th:text=" ${td.user} " />
+									<td th:text="${tt.name} " />
+									<td th:text=" ${tt.birthday} " />
+									<td th:text=" ${tt.gender} " />
+									<td th:text="${tt.phone} " />
+								</tr>
+							</tbody>
+						</table>
+						<div class="btn-group btn-group">
+							<a href="/dangnhap" class="btn btn-primary">Quay lại</a> 
+							<a th:href="@{/doimk/} + ${td.id}" class="btn btn-primary">Đổi mật khẩu</a> 
+							<a th:href="@{/nhaptt/} + ${td.id}" class="btn btn-primary">Nhập thông tin</a> 
+							<a th:href="@{/suatt/} + ${td.id}" class="btn btn-primary">Sửa thông tin</a>
+						</div>
+						<br>
+						<div class="btn-group-vertical">
+							<a th:href="@{/bookfood/} + ${td.id}" class="btn btn-primary btn-info">Đặt món</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

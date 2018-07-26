@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Handling Form Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+</head>
+<style type="text/css">
+.example {
+	margin: 20px;
+}
+</style>
+<body>
+	<div class="example">
+		<div class="container">
+			<div class="card">
+				<div class="content">
+					<div class="row">
+						<h2>Menu</h2>
+						<div class="col-md-2 col-md-offset-11">
+							<a th:href="@{/addfood}" class="btn btn-primary">Add</a>
+						</div>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Tên</th>
+									<th>Giá</th>
+									<th>Tình trạng</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+								<th:block th:each="food : ${fd}">
+									<tr>
+										<td><p th:text="${food.id}"></p></td>
+										<td><p th:text="${food.name}"></p></td>
+										<td><p th:text="${food.price}"></p></td>
+										<td><p th:text="${food.status}"></p></td>
+										<td><a th:href="@{/editfood/} + ${food.id}">Edit</a></td>
+										<td><a th:href="@{/deletefood/} + ${food.id}">Delete</a></td>
+									</tr>
+							</tbody>
+						</table>
+						<br>
+						<a th:href="@{/manage}" class="btn btn-primary btn-info">Quay lại</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

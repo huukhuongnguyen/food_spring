@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Handling Form Submission</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+</head>
+<style type="text/css">
+.example {
+	margin: 20px;
+}
+
+.listod {
+	border-style: double;
+	height: 400px;
+	width: 650px;
+	overflow-y: scroll;
+}
+
+.modul {
+	border-style: double;
+	height: 400px;
+	width: 330px;
+}
+</style>
+<body>
+	<div class="example">
+		<div class="container">
+			<div class="content">
+
+				<h3>Quản lý đặt món</h3>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						id="dLabel" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">Chọn khách hàng</button>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li th:each="id : ${idod}"><a
+							th:href="@{/manageorder/}+${id}" th:text="${id}"></a></li>
+					</ul>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-sm-7">
+						<div class="card-body">
+							<div class="listod">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>STT</th>
+											<th>Tên</th>
+											<th>Giá</th>
+											<th>Số lượng</th>
+											<th>thành tiền</th>
+											<!-- <th>Delete</th> -->
+										</tr>
+									</thead>
+									<tbody>
+										<th:block th:each="order,iterationStatus : ${lod}">
+											<tr>
+												<td><p th:text="${iterationStatus.count}">1</p></td>
+												<td><p th:text="${order.food_id.name}"></p></td>
+												<td><p th:text="${order.food_id.price}"></p></td>
+												<td><p th:text="${order.value}"></p></td>
+												<td><p th:text="${order.food_id.price}*${order.value}"></p></td>
+												<!-- <td><a th:href="@{/deleteorder/} + ${order.id}">Delete</a></td> -->
+											</tr>
+									</tbody>
+
+									<tbody>
+										<tr>
+											<td colspan="4"><label>Tổng tiền :</label></td>
+											<td><p th:text=" ${tong} " /></td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="modul">
+							<table>
+								<thead>
+									<tr>
+										<th>Thông tin khách hàng</th>
+									</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td><br></td>
+								</tr>
+									<tr>
+										<td><label>Mã khách hàng:</label></td>
+										<td><p th:text="${id}"></p></td>
+									</tr>
+									<tr>
+										<td><label>Tên Kháng hàng:</label></td>
+										<td><p th:text="${nm}"></p></td>
+									</tr>
+									<tr>
+										<td><label>Ngày sinh:</label></td>
+										<td><p th:text="${ns}"></p></td>
+									</tr>
+									<tr>
+										<td><label>Số điện thoại:</label></td>
+										<td><p th:text="${ph}"></p></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-sm-1">
+					<div class="btn-group-vertical">
+						<a th:href="@{/bill/}+${id}" class="btn btn-primary btn-info" >Xuất hóa đơn</a>
+						<a class="btn btn-primary btn-info" th:onclick="'myFunction()'" >Thanh toán</a>	
+					</div>
+						<script th:inline="javascript">
+						/*<![CDATA[*/
+							function myFunction() {
+								var txt;
+								var r = confirm("Xác nhận thanh toán");
+								var id =/*[[${id}]]*/"";
+								if (r == true) {
+									/*[+
+								    var myUrl = [[@{/pay/}]] + id; 
+								    +]*/
+									window.location.href = myUrl;
+								}else{
+									txt = "You pressed Cancel!";
+								}
+								
+								 document.getElementById("demo").innerHTML = txt;
+							}
+							/*]]>*/
+						</script>
+					</div>
+				</div>
+				<br> <a th:href="@{/manage}" class="btn btn-primary btn-info">Quay
+					lại</a>
+			</div>
+		</div>
+	</div>
+
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
